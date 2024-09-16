@@ -1,0 +1,6 @@
+@desi_library_api_HostAddress = http://localhost:5283
+
+GET {{desi_library_api_HostAddress}}/book/getallbooks
+Accept: application/json
+
+###

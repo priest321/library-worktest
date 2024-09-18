@@ -65,9 +65,9 @@ namespace desi_library_api.Controllers
         // Without being in a database, this update will not reflect in a next REST API request.
         [HttpPut]
         [Route("/book/UpdateBookBorrowStatus/{id}")]
-        public ActionResult UpdateBookBorrowStatus(int id)
+        public ActionResult UpdateBookBorrowStatus(int id,  [FromQuery] bool borrow)
         {
-            return _bookContext.UpdateBookBorrowStatus(id);
+            return _bookContext.UpdateBookBorrowStatus(id, borrow);
         }
     }
 }

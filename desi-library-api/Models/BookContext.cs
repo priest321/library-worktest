@@ -32,15 +32,21 @@ namespace desi_library_api.Models
             return _books.Where(a => a.Borrowed).ToList();
         }
 
-        public ActionResult UpdateBookBorrowStatus(int bookId)
+        public ActionResult UpdateBookBorrowStatus(int bookId, bool borrowed)
         {
+
             var book = _books.FirstOrDefault(a => a.Id == bookId);
             if (book == null)
             {
                 return new NotFoundResult();
             }
-            book.Borrowed = !book.Borrowed;
-            Console.WriteLine($"Book ID3: {book.Borrowed}");
+
+            if (book.Borrowed == borrowed){
+                return new NotFoundResult();
+            }
+
+            book.Borrowed = borrowed;
+            Console.WriteLine($"Book state: {book.Borrowed}");
             return new OkResult();
         }
     }

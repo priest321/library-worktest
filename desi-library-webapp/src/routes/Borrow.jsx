@@ -19,7 +19,7 @@ function Borrow() {
 
 	const handleBorrowBook = (bookId, borrowed) => {
 		console.log("id", bookId)
-		const response = request(`/book/UpdateBookBorrowStatus/${bookId}`, 'PUT')
+		const response = request(`/book/UpdateBookBorrowStatus/${bookId}?borrow=${!borrowed}`, 'PUT')
 		console.log(response)
     };
 	function available(id){

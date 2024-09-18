@@ -11,15 +11,15 @@ function Home() {
   };
   return (
     <Box>
-	  <Button 
-        variant="contained" 
-        color="primary" 
-        sx={{ mt: 2 }} 
+      <Typography>Welcome to the DESI Library</Typography>
+	  <Button
+        variant="contained"
+        color="primary"
+        sx={{ mt: 2 }}
         onClick={handleNavigateToBooks}
       >
-        Go to Books
+        View Books
       </Button>
-      <Typography>Welcome to the DESI Library</Typography>
     </Box>
   );
 }

@@ -18,9 +18,8 @@ namespace desi_library_api.Models
             return _books;
         }
 
-        // TODO: Implement
-        public Book GetBook(int id) {
-            return null;
+        public Book GetBookById(int id) {
+            return _books.FirstOrDefault(a => a.Id == id);
         }
 
         public IEnumerable<Book> BorrowableBooks()
@@ -35,7 +34,7 @@ namespace desi_library_api.Models
 
         public ActionResult UpdateBookBorrowStatus(int bookId)
         {
-            var book = _books.First(a => a.Id == bookId);
+            var book = _books.FirstOrDefault(a => a.Id == bookId);
             if (book == null)
             {
                 return new NotFoundResult();

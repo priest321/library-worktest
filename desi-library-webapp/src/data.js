@@ -7,16 +7,20 @@ import { useEffect, useState } from "react";
  * @param {*} body Body if chosen method requires it.
  * @returns The data that was requested.
  */
-export const useData = (path, method, body) => {
-  const [data, setData] = useState();
+export const useData = (path, method = "GET", body = null) => {
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     let ignore = false;
+
+    // Fetch data from the server
     request(path, method, body).then((json) => {
       if (!ignore) {
         setData(json);
       }
     });
+
+    // Cleanup function
     return () => {
       ignore = true;
     };
@@ -26,20 +30,40 @@ export const useData = (path, method, body) => {
 };
 
 
+
 const baseUrl = "http://localhost:5000";
 
 const request = async (path, method, body) => {
-  const resp = await fetch(`${baseUrl}${path}`, {
-    method,
-    headers: new Headers({
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    }),
-    body: body && JSON.stringify(body),
-  });
+  try {
+    const options = {
+      method,
+      headers: new Headers({
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      }),
+    };
 
-  /** This artificial delay is intentional -- please do not remove it! */
-  return await new Promise((resolve) =>
-    setTimeout(() => resolve(resp.json()), 2000)
-  );
+    // Include body only if necessary
+    if (body && (method === "POST" || method === "PUT" || method === "PATCH")) {
+      options.body = JSON.stringify(body);
+    }
+
+    // Perform the fetch request
+    const response = await fetch(`${baseUrl}${path}`, options);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Artificial delay for demonstration purposes
+    const data = await new Promise((resolve) =>
+      setTimeout(() => resolve(response.json()), 2000)
+    );
+
+    return data;
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return null;
+  }
 };
+

@@ -3,6 +3,7 @@ using desi_library_api.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
+
 namespace desi_library_api.Controllers
 {
     [ApiController]
@@ -50,6 +51,7 @@ namespace desi_library_api.Controllers
         [Route("/book/BorrowableBooks")]
         public IEnumerable<Book> BorrowableBooks()
         {
+
             return _bookContext.BorrowableBooks();
         }
 
@@ -63,9 +65,9 @@ namespace desi_library_api.Controllers
         // Without being in a database, this update will not reflect in a next REST API request.
         [HttpPut]
         [Route("/book/UpdateBookBorrowStatus/{id}")]
-        public ActionResult UpdateBookBorrowStatus(int bookId)
+        public ActionResult UpdateBookBorrowStatus(int id)
         {
-            return _bookContext.UpdateBookBorrowStatus(bookId);
+            return _bookContext.UpdateBookBorrowStatus(id);
         }
     }
 }

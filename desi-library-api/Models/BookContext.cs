@@ -40,6 +40,7 @@ namespace desi_library_api.Models
                 return new NotFoundResult();
             }
             book.Borrowed = !book.Borrowed;
+            Console.WriteLine($"Book ID3: {book.Borrowed}");
             return new OkResult();
         }
     }

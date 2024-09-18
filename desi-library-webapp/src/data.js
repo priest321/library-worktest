@@ -33,7 +33,7 @@ export const useData = (path, method = "GET", body = null) => {
 
 const baseUrl = "http://localhost:5000";
 
-const request = async (path, method, body) => {
+export const request = async (path, method, body) => {
   try {
     const options = {
       method,

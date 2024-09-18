@@ -40,10 +40,10 @@ namespace desi_library_api.Controllers
         }
 
         [HttpGet(Name = "GetBook")]
-        [Route("/book/GetBook")] 
-        public IEnumerable<Book> GetBook(int id) {
-            // TODO: Implement a way to get a single book's full information.
-            throw new NotImplementedException();
+        [Route("/book/GetBook/{id}")]
+        public ActionResult<Book> GetBook(int id) {
+			var book = _bookContext.GetBookById(id);
+			return book;
         }
 
         [HttpGet(Name = "BorrowableBooks")]
@@ -60,10 +60,9 @@ namespace desi_library_api.Controllers
             return _bookContext.UnBorrowableBooks();
         }
 
-
         // Without being in a database, this update will not reflect in a next REST API request.
         [HttpPut]
-        [Route("/book/UpdateBookBorrowStatus")]
+        [Route("/book/UpdateBookBorrowStatus/{id}")]
         public ActionResult UpdateBookBorrowStatus(int bookId)
         {
             return _bookContext.UpdateBookBorrowStatus(bookId);

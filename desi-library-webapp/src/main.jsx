@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/Root.jsx";
 import Home from "./routes/Home.jsx";
 import Books from "./routes/Books.jsx";
+import Borrow from "./routes/Borrow.jsx"; 
+import BookDetails from "./routes/BookDetails.jsx"; 
 
 import "./index.css";
 import '@fontsource/roboto/300.css';
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/books",
         element: <Books />
+      },
+	  {
+        path: "/borrow",
+        element: <Borrow />
+      },
+	  {
+        path: "book/:bookId",
+        element: <BookDetails />
       }
     ]
   }
